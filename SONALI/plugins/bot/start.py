@@ -1,9 +1,8 @@
 import time
+import asyncio
 from pyrogram import filters
-from pyrogram.errors import ChannelInvalid
-from pyrogram.enums import ChatType, ChatMembersFilter
-
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from pyrogram.enums import ChatType
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 from youtubesearchpython.__future__ import VideosSearch
 
 import config
@@ -17,7 +16,6 @@ from SONALI.utils.database import (
     get_lang,
     is_banned_user,
     is_on_off,
-    connect_to_chat,
 )
 from SONALI.utils.decorators.language import LanguageStart
 from SONALI.utils.formatters import get_readable_time
@@ -35,26 +33,29 @@ async def start_comm(client, message: Message, _):
     # 🕊️ Auto Reaction on /start
     await message.react("🕊️")
 
-    # 🎭 Typing Effect - Ding Dong
+    # 🎭 Loading Bar Effect
+    bars = [
+        "[          ] 0%",
+        "[█         ] 10%",
+        "[██        ] 20%",
+        "[███       ] 30%",
+        "[████      ] 40%",
+        "[█████     ] 50%",
+        "[██████    ] 60%",
+        "[███████   ] 70%",
+        "[████████  ] 80%",
+        "[█████████ ] 90%",
+        "[██████████] 100%"
+    ]
+    
     try:
-        vip = await message.reply_text("ᴅιиg ᴅσиg ꨄ︎❣️.....")
-        for i in range(5):
-            dots = "." * (5 - i)
-            extra_dots = "." * i
-            await vip.edit_text(f"ᴅιиg ᴅσиg ꨄ︎{dots}❣️{extra_dots}")
+        vip = await message.reply_text(bars[0])
+        for bar in bars[1:]:
             await asyncio.sleep(0.2)
+            await vip.edit_text(bar)
+        await asyncio.sleep(0.3)
         await vip.delete()
-
-        # 🎭 Typing Effect - "Starting..."
-        vips = await message.reply_text("ѕ")
-        steps = ["ѕт", "ѕтα", "ѕтαя", "ѕтαят", "ѕтαятι", 
-                 "ѕтαятιи", "ѕтαятιиg", "ѕтαятιиg.", "ѕтαятιиg...."]
-        for step in steps:
-            await asyncio.sleep(0.1)
-            await vips.edit_text(step)
-        await asyncio.sleep(0.2)
-        await vips.delete()
-
+        
         # 🎭 Sticker Send & Delete (3 sec)
         sticker = await client.send_sticker(
             chat_id=chat_id,
