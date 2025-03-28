@@ -1,29 +1,18 @@
-#<<<<<<<<<<<<<<Krish>>>>>>>>>>>>>>#
-#<<<<<<<<<<<<<<>>>>>>>>>>>>>>#
 import os
+from unidecode import unidecode
 from PIL import ImageDraw, Image, ImageFont, ImageChops
 from pyrogram import *
 from pyrogram.types import *
 from logging import getLogger
+from SONALI import LOGGER
+from pyrogram.types import Message
+from SONALI.misc import SUDOERS
 from SONALI import app
+from SONALI.utils.database import *
+from config import LOGGER_ID
 
 LOGGER = getLogger(__name__)
 
-class WelDatabase:
-    def __init__(self):
-        self.data = {}
-
-    async def find_one(self, chat_id):
-        return chat_id in self.data
-
-    async def add_wlcm(self, chat_id):
-        self.data[chat_id] = {}
-
-    async def rm_wlcm(self, chat_id):
-        if chat_id in self.data:
-            del self.data[chat_id]
-
-wlcm = WelDatabase()
 
 class temp:
     ME = None
@@ -33,7 +22,7 @@ class temp:
     U_NAME = None
     B_NAME = None
 
-def circle(pfp, size=(500, 500)):
+def circle(pfp, size=(450, 450)):
     pfp = pfp.resize(size, Image.LANCZOS).convert("RGBA")
     bigsize = (pfp.size[0] * 3, pfp.size[1] * 3)
     mask = Image.new("L", bigsize, 0)
@@ -44,26 +33,31 @@ def circle(pfp, size=(500, 500)):
     pfp.putalpha(mask)
     return pfp
 
-
-def welcomepic(pic, user, chatname, id, uname):
-    background = Image.open("SONALI/assets/Kr.png")
+def welcomepic(pic, user, chat, id, uname):
+    background = Image.open("SONALI/assets/welcome.png")
     pfp = Image.open(pic).convert("RGBA")
     pfp = circle(pfp)
-    pfp = pfp.resize((1157, 1158))
+    pfp = pfp.resize(
+        (450, 450)
+    ) 
     draw = ImageDraw.Draw(background)
-    font = ImageFont.truetype('SONALI/assets/font.ttf', size=110)
-    welcome_font = ImageFont.truetype('SONALI/assets/font.ttf', size=60)
-    draw.text((1800, 700), f'NAME: {user}', fill=(255, 255, 255), font=font)
-    draw.text((1800, 830), f'ID: {id}', fill=(255, 255, 255), font=font)
-    draw.text((1800, 965), f"USERNAME : {uname}", fill=(255, 255, 255), font=font)
-    pfp_position = (391, 336)
-    background.paste(pfp, pfp_position, pfp)
-    background.save(f"downloads/welcome#{id}.png")
+    font = ImageFont.truetype('SONALI/assets/font.ttf', size=45)
+    font2 = ImageFont.truetype('SONALI/assets/font.ttf', size=90)
+    draw.text((65, 250), f'NAME : {unidecode(user)}', fill="white", font=font)
+    draw.text((65, 340), f'ID : {id}', fill="white", font=font)
+    draw.text((65, 430), f"USERNAME : {uname}", fill="white",font=font)
+    pfp_position = (767, 133)  
+    background.paste(pfp, pfp_position, pfp)  
+    background.save(
+        f"downloads/welcome#{id}.png"
+    )
     return f"downloads/welcome#{id}.png"
 
+
+HUHU = """**
 @app.on_message(filters.command("swel") & ~filters.private)
 async def auto_state(_, message):
-    usage = "**ᴜsᴀɢᴇ:**\n**⦿ /swel [on|off]**"
+    usage = "**❖ ᴜsᴀɢᴇ ➥** /swel [ᴇɴᴀʙʟᴇ|ᴅɪsᴀʙʟᴇ]"
     if len(message.command) == 1:
         return await message.reply_text(usage)
     chat_id = message.chat.id
@@ -72,30 +66,34 @@ async def auto_state(_, message):
         enums.ChatMemberStatus.ADMINISTRATOR,
         enums.ChatMemberStatus.OWNER,
     ):
-        A = await wlcm.find_one(chat_id)
-        state = message.text.split(None, 1)[1].strip().lower()
-        if state == "off":
-            if A:
-                await message.reply_text("**ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ᴀʟʀᴇᴀᴅʏ ᴅɪsᴀʙʟᴇᴅ !**")
-            else:
-                await wlcm.add_wlcm(chat_id)
-                await message.reply_text(f"**ᴅɪsᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ** {message.chat.title}")
-        elif state == "on":
-            if not A:
-                await message.reply_text("**ᴇɴᴀʙʟᴇ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ.**")
-            else:
-                await wlcm.rm_wlcm(chat_id)
-                await message.reply_text(f"**ᴇɴᴀʙʟᴇᴅ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ ɪɴ ** {message.chat.title}")
-        else:
-            await message.reply_text(usage)
+      A = await wlcm.find_one({"chat_id" : chat_id})
+      state = message.text.split(None, 1)[1].strip()
+      state = state.lower()
+      if state == "enable":
+        if A:
+           return await message.reply_text("✦ Special Welcome Already Enabled")
+        elif not A:
+           await add_wlcm(chat_id)
+           await message.reply_text(f"✦ Enabled Special Welcome in {message.chat.title}")
+      elif state == "disable":
+        if not A:
+           return await message.reply_text("✦ Special Welcome Already Disabled")
+        elif A:
+           await rm_wlcm(chat_id)
+           await message.reply_text(f"✦ Disabled Special Welcome in {message.chat.title}")
+      else:
+        await message.reply_text(usage)
     else:
-        await message.reply("**sᴏʀʀʏ ᴏɴʟʏ ᴀᴅᴍɪɴs ᴄᴀɴ ᴇɴᴀʙʟᴇ ᴡᴇʟᴄᴏᴍᴇ ɴᴏᴛɪғɪᴄᴀᴛɪᴏɴ!**")
-        
+        await message.reply("✦ Only Admins Can Use This Command")
+  **  """
+#bhag 
 
 @app.on_chat_member_updated(filters.group, group=-3)
 async def greet_group(_, member: ChatMemberUpdated):
     chat_id = member.chat.id
-    A = await wlcm.find_one(chat_id)
+   # A = await wlcm.find_one({"chat_id" : chat_id})
+   # if not A:
+  #     return
     if (
         not member.new_chat_member
         or member.new_chat_member.status in {"banned", "left", "restricted"}
@@ -108,7 +106,7 @@ async def greet_group(_, member: ChatMemberUpdated):
             user.photo.big_file_id, file_name=f"pp{user.id}.png"
         )
     except AttributeError:
-        pic = "AarohiX/assets/upic.png"
+        pic = "SONALI/assets/upic.png"
     if (temp.MELCOW).get(f"welcome-{member.chat.id}") is not None:
         try:
             await temp.MELCOW[f"welcome-{member.chat.id}"].delete()
@@ -121,29 +119,24 @@ async def greet_group(_, member: ChatMemberUpdated):
         temp.MELCOW[f"welcome-{member.chat.id}"] = await app.send_photo(
             member.chat.id,
             photo=welcomeimg,
-            caption=f"""
+            caption= f"""
+ㅤㅤㅤ◦•●◉✿ ᴡᴇʟᴄᴏᴍᴇ ʙᴀʙʏ ✿◉●•◦
+▰▱▱▱▱▱▱▱▱▱▱▱▱▱▰
 
-❣️𝐖ᴇʟᴄᴏᴍᴇ 𝐈ɴ 𝐍ᴇᴡ 𝐆ʀᴏᴜᴘ ❣️
-➖➖➖➖➖➖➖➖➖➖➖➖
-🏘{member.chat.title}🥳
-➖➖➖➖➖➖➖➖➖➖➖➖
-● 𝐍ᴀᴍᴇ ➥ {user.mention} 
-● 𝐔ꜱᴇʀɴᴀᴍᴇ ➥ @{user.username} 
+● ɴᴀᴍᴇ ➥  {user.mention}
+● ᴜsᴇʀɴᴀᴍᴇ ➥  @{user.username}
+● ᴜsᴇʀ ɪᴅ ➥  {user.id}
 
-┏━━━━━━━━━━━━━━━
-┣ 𝟏 ➥ ᴅᴏɴᴛ ᴀʙᴜsɪɴɢ  👣
-
-┣ 𝟐 ➥ 💗𝐑ᴇsᴘᴇ𝐂ᴛ 𝐄ᴠᴇʀ𝐘 𝐁ᴏ𝐘 𝐅ᴇᴇʟɪɴ𝐆
-
-┣ 𝟑 ➥ ʟɪɴᴋ ɴᴏᴛ ᴀʟʟᴏᴡ 
-
-┣ 𝟒 ➥ ᴅᴏɴᴛ sᴇɴᴅ ᴀᴅᴜʟᴛ sᴛᴜғғ
-┗━━━━━━━━━━━━━━━━━      
-
-❖𝐌ᴀᴅᴇ  𝐁ʏ [𝐊ʀɪsʜ 𝐌ᴜsɪᴄ](https://t.me/krishnetwork)
+❖ ᴘᴏᴡᴇʀᴇᴅ ʙʏ ➥ ‼ ️Ꭾʀɪ֟፝ؖ۬ɴᴄᴇ 𝐂ᴏᴅᴇz ⚝゙
+▰▱▱▱▱▱▱▱▱▱▱▱▱▱▰
 """,
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton(f"𝐀ᴅᴅ 𝐌ᴇ 𝐁ᴀʙʏ", url=f"https://t.me/syn_ixbot?startgroup=true")]])
-        )
+reply_markup=InlineKeyboardMarkup(
+[
+[InlineKeyboardButton(f"ᴀᴅᴅ ᴍᴇ ʙᴀʙʏ", url=f"https://t.me/Sweety_music09_BOT?startgroup=new"),
+]
+]
+))
+
     except Exception as e:
         LOGGER.error(e)
     try:
@@ -152,15 +145,5 @@ async def greet_group(_, member: ChatMemberUpdated):
     except Exception as e:
         pass
 
-@app.on_message(filters.new_chat_members & filters.group, group=-1)
-async def bot_wel(_, message):
-    for u in message.new_chat_members:
-        if u.id == app.me.id:
-            await app.send_message(LOG_CHANNEL_ID, f"""
-NEW GROUP
-➖➖➖➖➖➖➖➖➖➖➖➖
-NAME: {message.chat.title}
-ID: {message.chat.id}
-USERNAME: @{message.chat.username}
-➖➖➖➖➖➖➖➖➖➖➖➖
-""")
+
+      
