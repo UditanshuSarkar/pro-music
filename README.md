@@ -1,21 +1,21 @@
-<p align="center"><a href="https://github.com/Xkrishmishra/SONALI/blob/main/SONALI/assets/cookies.txt"> <img src="https://img.shields.io/badge/Add%20Your%20Cookies-blue?style=for-the-badge" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://github.com/Prince-private-repo/pro-music/blob/main/SONALI/assets/cookies.txt"> <img src="https://img.shields.io/badge/Add%20Your%20Cookies-blue?style=for-the-badge" width="220" height="38.45"/></a></p>
   
   <h2 align="center">
-    ──「 𝐒ᴏɴᴀʟɪ ダ ᴍᴜsɪᴄ 
+    ── •⏤‌𝄞⃝🍧 ‌⃪‌𝐒ᴡᴇᴇᴛʏ 𝐌ᴜsɪᴄ♥️꯭꯭꯭꯭ ꯭꯭᪳𝆺𝅥
 <p align="center">
-  <img src="https://i.ibb.co/2FSqhSr/photo-2024-09-19-18-33-46-7416425646991081500.jpg">
+  <img src="https://i.ibb.co/39WSm9zM/IMG-20250207-080405-192.jpg">
 </p>
 
 <h3 align="center">
     ─「 ᴅᴇᴩʟᴏʏ ᴏɴ ʜᴇʀᴏᴋᴜ 」─
 </h3>
 
-<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/Xkrishmishra/sonali"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://dashboard.heroku.com/new?template=https://github.com/Prince-private-repo/pro-music"> <img src="https://img.shields.io/badge/Deploy%20On%20Heroku-black?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 <h3 align="center">
     ─「 ᴅᴇᴩʟᴏʏ ᴏɴ ʟᴏᴄᴀʟ ʜᴏsᴛ/ ᴠᴘs 」─
 </h3>
 
-- ɢᴇᴛ ʏᴏᴜʀ [Necessary Variables](https://github.com/xkrishmishra/sonali/blob/main/sample.env)
+- ɢᴇᴛ ʏᴏᴜʀ [Necessary Variables](https://github.com/Prince-private-repo/pro-music/blob/main/sample.env)
 - ᴜᴘɢʀᴀᴅᴇ ᴀɴᴅ ᴜᴘᴅᴀᴛᴇ ʙʏ :
 ```sudo apt-get update && sudo apt-get upgrade -y```
 - ɪɴsᴛᴀʟʟ ғғᴍᴘᴇɢ ʙʏ :
@@ -26,9 +26,9 @@
 ```sudo pip3 install -U pip```
 - ɪɴsᴛᴀʟʟ ɴᴏᴅᴇ ᴊs ʙʏ :
 ```curl -fssL https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install nodejs -y && npm i -g npm```
-- ᴀᴅᴅ ʏᴏᴜʀ ᴄᴏᴏᴋɪᴇs ᴛᴏ [cookies/cookies.txt](https://github.com/Xkrishmishra/SONALI/blob/main/SONALI/assets/cookies.txt)
+- ᴀᴅᴅ ʏᴏᴜʀ ᴄᴏᴏᴋɪᴇs ᴛᴏ [cookies/cookies.txt](https://github.com/Prince-private-repo/pro-music/blob/main/SONALI/assets/cookies.txt)
 - ᴄʟᴏɴᴇ ᴛʜᴇ ʀᴇᴘᴏsɪᴛᴏʀʏ ʙʏ :
-```git clone https://github.com/xkrishmishra/Sonali&& cd Sonali```
+```git clone https://github.com/Prince-private-repo/pro-music&& cd Sonali```
 - ɪɴsᴛᴀʟʟ ʀᴇǫᴜɪʀᴇᴍᴇɴᴛs ʙʏ :
 ```pip3 install -U -r requirements.txt```
 - ғɪʟʟ ʏᴏᴜʀ ᴠᴀʀɪᴀʙʟᴇs ɪɴ ᴛʜᴇ ᴇɴᴠ ʙʏ :
@@ -49,12 +49,12 @@
 </h3>
 
 <p align="center">
-<a href="https://telegram.me/Krishsupport"><img src="https://img.shields.io/badge/-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://telegram.me/SWEETY_BOT_UPDATE"><img src="https://img.shields.io/badge/-Support%20Group-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 
 <p align="center">
-<a href="https://telegram.me/Krishnetwork"><img src="https://img.shields.io/badge/-Support%20Channel-blue.svg?style=for-the-badge&logo=Telegram"></a>
+<a href="https://telegram.me/SWEETY_BOT_UPDATE"><img src="https://img.shields.io/badge/-Support%20Channel-blue.svg?style=for-the-badge&logo=Telegram"></a>
 </p>
 
-- <b> _sᴩᴇᴄɪᴀʟ ᴛʜᴀɴᴋs ᴛᴏ [ᴛᴇᴀᴍ ᴋʀɪsʜ](https://github.com/Xkrishmishra) ғᴏʀ [𝐊ʀɪsʜ ʙᴏᴛ](https://github.com/xkrishmishra/sonali)_ </b>
+- <b> [‼ 𝐏ʀɪɴᴄᴇ 𖤍 𝐂ᴏᴅᴇ𝐙 𒁍](https://github.com/Xkrishmishra) ғᴏʀ [•⏤‌𝄞⃝🍧 ‌⃪‌𝐒ᴡᴇᴇᴛʏ 𝐌ᴜsɪᴄ♥️꯭꯭꯭꯭ ꯭꯭᪳𝆺𝅥](https://github.com/Prince-private-repo/pro-music)_ </b>
 
