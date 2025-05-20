@@ -13,9 +13,9 @@ API_HASH = getenv("API_HASH")
 # Get your token from @BotFather on Telegram.
 BOT_TOKEN = getenv("BOT_TOKEN")
 # -------------------------------------------------------
-OWNER_USERNAME = getenv("OWNER_USERNAME","PRINCE_WEBZ")
+OWNER_USERNAME = getenv("OWNER_USERNAME","uditnshu_sarkar")
 # --------------------------------------------------------
-BOT_USERNAME = getenv("BOT_USERNAME","Sweety_music09_BOT")
+BOT_USERNAME = getenv("BOT_USERNAME","hdjdjdjdjdjdksksksjjs_bot")
 # --------------------------------------------------------
 BOT_NAME = getenv("BOT_NAME")
 # ---------------------------------------------------------
@@ -30,7 +30,7 @@ DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 17000))
 LOGGER_ID = int(getenv("LOGGER_ID", None))
 
 # Get this value from @Sweety_music09_BOT on Telegram by /id
-OWNER_ID = int(getenv("OWNER_ID", 7096860602))
+OWNER_ID = int(getenv("OWNER_ID", 7637584181))
 
 # make your bots privacy from telegra.ph and put your url here 
 PRIVACY_LINK = getenv("PRIVACY_LINK", "https://telegra.ph/sweety-music-03-28")
