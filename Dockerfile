@@ -1,13 +1,15 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs19
+FROM python:3.13-slim
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ffmpeg aria2 \
-    && apt-get clean \
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ffmpeg \
     && rm -rf /var/lib/apt/lists/*
 
-COPY . /app/
-WORKDIR /app/
-RUN python -m pip install --no-cache-dir --upgrade pip
-RUN pip3 install --no-cache-dir --upgrade --requirement requirements.txt
+RUN pip install --no-cache-dir uv
 
-CMD bash start
+COPY . /app/
+
+RUN uv pip install -e . --system
+
+CMD ["tgmusic"]
